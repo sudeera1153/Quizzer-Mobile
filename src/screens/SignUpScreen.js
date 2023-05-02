@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView,Alert as NativeAlert} from 'react-native';
+import {View, Text, SafeAreaView, Alert} from 'react-native';
 import FormButton from '../components/shared/FormButton';
 import FormInput from '../components/shared/FormInput';
 import {COLORS} from '../constants/theme';
@@ -13,17 +13,12 @@ const SignUpScreen = ({navigation}) => {
   const handleOnSubmit = () => {
     if (email != '' && password != '' && confirmPassword != '') {
       if (password == confirmPassword) {
-        signUp(email, password,navigation);
+        //   SignUp
+        signUp(email, password);
       } else {
-        NativeAlert.alert('Error','Entered Passwords does not match',
-        [{
-          text:'Ok',
-          onPress: ()=> console.log('pressed'),
-          style:'cancel'
-        }]);
+        Alert.alert('password did not match');
       }
     }
-    
   };
 
   return (
@@ -35,7 +30,7 @@ const SignUpScreen = ({navigation}) => {
         justifyContent: 'flex-start',
         padding: 20,
       }}>
-
+      {/* Header */}
       <Text
         style={{
           fontSize: 24,
@@ -46,6 +41,7 @@ const SignUpScreen = ({navigation}) => {
         Sign Up
       </Text>
 
+      {/* Email */}
       <FormInput
         labelText="Email"
         placeholderText="enter your email"
@@ -54,6 +50,7 @@ const SignUpScreen = ({navigation}) => {
         keyboardType={'email-address'}
       />
 
+      {/* Password */}
       <FormInput
         labelText="Password"
         placeholderText="enter your password"
@@ -62,6 +59,7 @@ const SignUpScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
+      {/* Confirm Password */}
       <FormInput
         labelText="Confirm Password"
         placeholderText="enter your password again"
@@ -70,12 +68,14 @@ const SignUpScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
+      {/* Submit button */}
       <FormButton
         labelText="Sign up"
         handleOnPress={handleOnSubmit}
         style={{width: '100%'}}
       />
 
+      {/* Footer */}
       <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
         <Text>Already have an account?</Text>
         <Text

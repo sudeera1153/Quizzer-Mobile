@@ -24,7 +24,7 @@ const SignInScreen = ({navigation}) => {
         justifyContent: 'flex-start',
         padding: 20,
       }}>
-      
+      {/* Header */}
       <Text
         style={{
           fontSize: 24,
@@ -32,10 +32,10 @@ const SignInScreen = ({navigation}) => {
           fontWeight: 'bold',
           marginVertical: 32,
         }}>
-        Welcome Back! Sign In to Quizzer
+        Sign In
       </Text>
 
-      
+      {/* Email */}
       <FormInput
         labelText="Email"
         placeholderText="enter your email"
@@ -44,7 +44,7 @@ const SignInScreen = ({navigation}) => {
         keyboardType={'email-address'}
       />
 
-      
+      {/* Password */}
       <FormInput
         labelText="Password"
         placeholderText="enter your password"
@@ -53,14 +53,14 @@ const SignInScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      
+      {/* Submit button */}
       <FormButton
         labelText="Submit"
         handleOnPress={handleOnSubmit}
         style={{width: '100%'}}
       />
 
-      
+      {/* Footer */}
       <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
         <Text>Don't have an account?</Text>
         <Text
