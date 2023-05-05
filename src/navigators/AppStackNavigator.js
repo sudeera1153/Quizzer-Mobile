@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   AddQuestionScreen,
@@ -8,10 +9,12 @@ import {
 } from '../screens';
 
 const Stack = createStackNavigator();
+// const Drawer = createDrawerNavigator();
 
 const AppStackNavigator = () => {
   return (
-    <Stack.Navigator
+<NavigationContainer independent={true}>
+<Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
@@ -20,6 +23,7 @@ const AppStackNavigator = () => {
       <Stack.Screen name="AddQuestionScreen" component={AddQuestionScreen} />
       <Stack.Screen name="PlayQuizScreen" component={PlayQuizScreen} />
     </Stack.Navigator>
+</NavigationContainer>
   );
 };
 
