@@ -6,16 +6,23 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  StyleSheet,
+  Dimensions
 } from 'react-native';
 import {signOut} from '../utils/auth';
 import FormButton from '../components/shared/FormButton';
 import {COLORS} from '../constants/theme';
 import {getQuizzes} from '../utils/database';
+import { Card } from "react-native-paper";
+import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = ({navigation}) => {
+
+const HomeScreen = () => {
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const { width } = Dimensions.get('window');
 
+  
   const getAllQuizzes = async () => {
     setRefreshing(true);
     const quizzes = await getQuizzes();
@@ -30,9 +37,63 @@ const HomeScreen = ({navigation}) => {
     setRefreshing(false);
   };
 
+  /*{Horizontal Flatlist Data}*/
+  const dummyData = [
+    {
+      id: 1,
+      name: "Beginner",
+      color: "green",
+    },
+    {
+      id: 2,
+      name: "Intermidiate",
+      color: "orange",
+    },
+    {
+      id: 3,
+      name: "Pro",
+      color: "red",
+    },
+    {
+      id: 4,
+      name: "Master",
+      color: "black",
+    }
+  ];
+
+
+
   useEffect(() => {
     getAllQuizzes();
   }, []);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      paddingTop: 120,
+      backgroundColor: "#ecf0f1",
+      padding: 8
+    },
+    flatList: {
+      paddingHorizontal: 16,
+      paddingVertical: 20,
+    },
+    cardContainer: {
+      height: 50,
+      width: width * 0.3,
+      marginRight: 8,
+    },
+    card: {
+      height: 40,
+      width: width * 0.3,
+      borderRadius: 12,
+      padding: 10
+    },
+    text: { color: "white", fontWeight: 'bold' , textAlign:'center'}
+  });
+
+  
 
   return (
     <SafeAreaView
@@ -44,34 +105,66 @@ const HomeScreen = ({navigation}) => {
       <StatusBar backgroundColor={COLORS.white} barStyle={'dark-content'} />
 
       <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#ffffff',
+        elevation: 4,
+        paddingHorizontal: 20,
+      }}
+    >
+      <Text 
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          backgroundColor: COLORS.white,
-          elevation: 4,
-          paddingHorizontal: 20,
-        }}>
-        <Text style={{fontSize: 20, color: COLORS.black}}>Quiz App</Text>
-        <Text
-          style={{
-            fontSize: 20,
-            padding: 10,
-            color: COLORS.error,
-          }}
-          onPress={signOut}>
-          Logout
-        </Text>
-      </View>
-
-      {/* Quiz list */}
+          flex: 1,
+          fontSize: 30,
+          fontWeight: 'bold',
+          color: '#000000',
+          textAlign: 'center',
+          marginTop: 10,
+          marginBottom: 20
+        }}
+      >
+        Welcome to Quizzer!
+      </Text>
+    </View>
+    <FlatList
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.flatList}
+        horizontal={true}
+        data={dummyData}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              style={styles.cardContainer}
+              onPress={() => console.log("pressed")}
+            >
+              <Card style={[styles.card, {backgroundColor: item.color}]}>
+                <Text style={styles.text}>{item.name}</Text>
+              </Card>
+            </TouchableOpacity>
+          );
+        }}
+      />
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: 'bold',
+          paddingLeft: 20,
+          paddingBottom: 5,
+          paddingTop: 5
+        }}
+      >
+        Recent Quizzes
+      </Text>
       <FlatList
         data={allQuizzes}
         onRefresh={getAllQuizzes}
         refreshing={refreshing}
         showsVerticalScrollIndicator={false}
         style={{
-          paddingVertical: 20,
+          paddingVertical: 10,
         }}
         renderItem={({item: quiz}) => (
           <View
@@ -113,7 +206,7 @@ const HomeScreen = ({navigation}) => {
       />
 
       {/* Button */}
-      <FormButton
+      {/* <FormButton
         labelText="Create Quiz"
         style={{
           position: 'absolute',
@@ -123,7 +216,7 @@ const HomeScreen = ({navigation}) => {
           paddingHorizontal: 30,
         }}
         handleOnPress={() => navigation.navigate('CreateQuizScreen')}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
