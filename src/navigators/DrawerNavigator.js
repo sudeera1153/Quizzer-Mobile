@@ -3,7 +3,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/HomeScreen';
 import AppStackNavigator from './AppStackNavigator';
+import FilterCSStackNavigator from './FilterCSStackNavigator';
 import TestScreen from '../screens/TestScreen';
+import Filterscreen_CS from '../screens/FilterScreens/Filterscreen_CS';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
 
@@ -54,7 +56,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Filter : C#"
-        component={TestScreen}
+        component={FilterCSStackNavigator}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="funnel-outline" size={22} color={color} />

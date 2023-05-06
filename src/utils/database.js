@@ -17,9 +17,22 @@ export const createQuestion = (currentQuizId, currentQuestionId, question) => {
     .set(question);
 };
 
+// Create New User in Firestore
+export const createUser = (email) => {
+  return firestore()
+    .collection('users')
+    .doc('JzrsQ4ZPT8J5oG1OHPOs')
+    .set(email);
+};
+
+
 // Get All Quizzes
 export const getQuizzes = () => {
   return firestore().collection('Quizzes').get();
+};
+
+export const getQuizzes_CS = () => {
+  return firestore().collection('Quizzes').where("title","==","12").get();
 };
 
 // Get Quiz Details by id

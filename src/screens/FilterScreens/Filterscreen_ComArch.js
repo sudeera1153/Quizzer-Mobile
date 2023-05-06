@@ -9,15 +9,15 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native';
-import {signOut} from '../utils/auth';
-import FormButton from '../components/shared/FormButton';
-import {COLORS} from '../constants/theme';
-import {getQuizzes} from '../utils/database';
+import {signOut} from '../../utils/auth';
+import FormButton from '../../components/shared/FormButton';
+import {COLORS} from '../../constants/theme';
+import {getQuizzes} from '../../utils/database';
 import { Card } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { width } = Dimensions.get('window');
