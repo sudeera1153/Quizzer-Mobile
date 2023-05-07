@@ -8,6 +8,7 @@ import TestScreen from '../screens/TestScreen';
 import Filterscreen_CS from '../screens/FilterScreens/Filterscreen_CS';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
+import FilterComArchStackNavigator from './FilterComArchStackNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -74,7 +75,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="Filter : Com Architecture"
-        component={TestScreen}
+        component={FilterComArchStackNavigator}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="funnel-outline" size={22} color={color} />
