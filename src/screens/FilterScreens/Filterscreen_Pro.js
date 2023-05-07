@@ -12,7 +12,7 @@ import {
 import {signOut} from '../../utils/auth';
 import FormButton from '../../components/shared/FormButton';
 import {COLORS} from '../../constants/theme';
-import {getQuizzes_ComArch} from '../../utils/database';
+import {getQuizzes_Pro} from '../../utils/database';
 import { Card } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 
@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}) => {
   
   const getAllQuizzes = async () => {
     setRefreshing(true);
-    const quizzes = await getQuizzes_ComArch();
+    const quizzes = await getQuizzes_Pro();
 
     // Transform quiz data
     let tempQuizzes = [];
@@ -125,7 +125,7 @@ const HomeScreen = ({navigation}) => {
           marginBottom: 20
         }}
       >
-        Filtered Quiz : Comp. Theroy
+        Pro Level Quizzes
       </Text>
     </View>
     

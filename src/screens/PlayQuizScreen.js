@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect , useContext} from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,21 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 import {COLORS} from '../constants/theme';
 import {getQuestionsByQuizId, getQuizById} from '../utils/database';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FormButton from '../components/shared/FormButton';
 import ResultModal from '../components/playQuizScreen/ResultModal';
+import UserContext from '../context/UserContext';
 
 const PlayQuizScreen = ({navigation, route}) => {
+  const user = useContext(UserContext)
+
+  const [userdet, SetUserdet] = useState('')
+  const [quizdet, SetQuizdet] = useState('')
   const [currentQuizId, setCurrentQuizId] = useState(route.params.quizId);
   const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([]);
@@ -60,8 +67,34 @@ const PlayQuizScreen = ({navigation, route}) => {
     setQuestions([...tempQuestions]);
   };
 
+  retrivebaseinfo = () =>{
+    firestore()
+    .collection('users')
+    .doc(user && user.email)
+    .get()
+    .then(
+      documentSnapshot => {
+        SetUserdet(documentSnapshot.data())
+      }
+    )
+    console.log(userdet)
+    firestore()
+    .collection('Quizzes')
+    .doc(currentQuizId)
+    .get()
+    .then(
+      documentSnapshot => {
+        SetQuizdet(documentSnapshot.data())
+      }
+    )
+    console.log(quizdet)
+
+  }
+
   useEffect(() => {
     getQuizAndQuestionDetails();
+    retrivebaseinfo();
+
   }, []);
 
   const getOptionBgColor = (currentQuestion, currentOption) => {
@@ -91,6 +124,30 @@ const PlayQuizScreen = ({navigation, route}) => {
       return COLORS.black;
     }
   };
+
+
+  const handleonsubmit = async() => {
+    firestore()
+    .collection('Grades')
+    .doc(`${user.email}_${currentQuizId}`)
+    .set({
+
+        email:userdet.email, 
+        degree:userdet.degree, 
+        intake:userdet.intake,
+        totalquestions:questions.length,
+        correctanswers: correctCount,
+        incorrectanswers: incorrectCount,
+        correctpercentage: correctCount/questions.length*100,
+        completeddatetime: `${new Date().getFullYear()}/${('0' + (new Date().getMonth() + 1)).slice(-2)}/${('0' + new Date().getDate()).slice(-2)} ${('0' + new Date().getHours()).slice(-2)}:${('0' + new Date().getMinutes()).slice(-2)}:${('0' + new Date().getSeconds()).slice(-2)}`
+        })
+    .then(() => {
+
+      setIsResultModalVisible(true);
+        // ToastAndroid.show('Grade saved', ToastAndroid.SHORT);
+    })
+    
+  }
 
   return (
     <SafeAreaView
@@ -269,7 +326,8 @@ const PlayQuizScreen = ({navigation, route}) => {
             style={{margin: 10}}
             handleOnPress={() => {
               // Show Result modal
-              setIsResultModalVisible(true);
+              handleonsubmit();
+              
             }}
           />
         )}

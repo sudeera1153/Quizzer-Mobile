@@ -7,6 +7,10 @@ import {
   HomeScreen,
   PlayQuizScreen,
 } from '../screens';
+import FilterBeginnerStackNavigator from './FilterBeginnerStackNavigator';
+import FilterIntermidiateStackNavigator from './FilterIntermidiateStackNavigator';
+import FilterProStackNavigator from './FilterProStackNavigator';
+import FilterMasterStackNavigator from './FilterMasterStackNavigator';
 
 const Stack = createStackNavigator();
 // const Drawer = createDrawerNavigator();
@@ -22,6 +26,10 @@ const AppStackNavigator = () => {
       <Stack.Screen name="CreateQuizScreen" component={CreateQuizScreen} />
       <Stack.Screen name="AddQuestionScreen" component={AddQuestionScreen} />
       <Stack.Screen name="PlayQuizScreen" component={PlayQuizScreen} />
+      <Stack.Screen name="FilterBeginner" component={FilterBeginnerStackNavigator} />
+      <Stack.Screen name="FilterIntermidiate" component={FilterIntermidiateStackNavigator} />
+      <Stack.Screen name="FilterPro" component={FilterProStackNavigator} />
+      <Stack.Screen name="FilterMaster" component={FilterMasterStackNavigator} />
     </Stack.Navigator>
 </NavigationContainer>
   );
