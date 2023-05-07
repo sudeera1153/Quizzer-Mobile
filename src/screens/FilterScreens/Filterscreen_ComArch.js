@@ -12,12 +12,12 @@ import {
 import {signOut} from '../../utils/auth';
 import FormButton from '../../components/shared/FormButton';
 import {COLORS} from '../../constants/theme';
-import {getQuizzes} from '../../utils/database';
+import {getQuizzes_ComArch} from '../../utils/database';
 import { Card } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { width } = Dimensions.get('window');
@@ -25,7 +25,7 @@ const HomeScreen = () => {
   
   const getAllQuizzes = async () => {
     setRefreshing(true);
-    const quizzes = await getQuizzes();
+    const quizzes = await getQuizzes_ComArch();
 
     // Transform quiz data
     let tempQuizzes = [];
@@ -125,39 +125,10 @@ const HomeScreen = () => {
           marginBottom: 20
         }}
       >
-        Welcome to Quizzer!
+        Filtered Quiz : C#
       </Text>
     </View>
-    <FlatList
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.flatList}
-        horizontal={true}
-        data={dummyData}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              style={styles.cardContainer}
-              onPress={() => console.log("pressed")}
-            >
-              <Card style={[styles.card, {backgroundColor: item.color}]}>
-                <Text style={styles.text}>{item.name}</Text>
-              </Card>
-            </TouchableOpacity>
-          );
-        }}
-      />
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: 'bold',
-          paddingLeft: 20,
-          paddingBottom: 5,
-          paddingTop: 5
-        }}
-      >
-        Recent Quizzes
-      </Text>
+    
       <FlatList
         data={allQuizzes}
         onRefresh={getAllQuizzes}

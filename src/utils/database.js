@@ -35,6 +35,11 @@ export const getQuizzes_CS = () => {
   return firestore().collection('Quizzes').where("title","==","12").get();
 };
 
+export const getQuizzes_ComArch = () => {
+  return firestore().collection('Quizzes').where("title","==","ss").get();
+};
+
+
 // Get Quiz Details by id
 export const getQuizById = currentQuizId => {
   return firestore().collection('Quizzes').doc(currentQuizId).get();
