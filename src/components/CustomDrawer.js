@@ -25,6 +25,7 @@ const CustomDrawer = props => {
   const [usrdetails, setUsrdetails] = useState('');
   const [pfp, setpfp] = useState('');
   const [isProfilePicSet, SetisProfilePicSet] = useState(false)
+  const [userdet, SetUserdet] = useState(false)
   let isLoadinged = false
   let id = null
 
@@ -40,13 +41,12 @@ const CustomDrawer = props => {
       .get()
       .then(
         documentSnapshot => {
-          console.log(documentSnapshot.data())
+          SetUserdet(documentSnapshot.data())
           id = documentSnapshot.data().imageUrl
-          console.log(id)
           if(id != null || id != '')
           setpfp(id);
           {isLoadinged = true}
-          console.log(isLoadinged)
+          console.log(userdet)
 
         }
       ) 
@@ -78,26 +78,20 @@ const CustomDrawer = props => {
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
             }}>
-            {user && user.email}
+            {userdet && userdet.name}
           </Text>
           <View style={{flexDirection: 'row'}}>
+          <FontAwesome5 name="at" size={18} color="#fff" />
             <Text
               style={{
                 color: '#fff',
                 fontFamily: 'Roboto-Regular',
                 marginRight: 5,
+                marginLeft: 5
               }}>
-              280 Coins
+              {userdet && userdet.email}
             </Text>
-            <Text
-              style={{
-                color: '#fff',
-                fontFamily: 'Roboto-Regular',
-                marginRight: 5,
-              }}>
-              280 Coins
-            </Text>
-            <FontAwesome5 name="coins" size={14} color="#fff" />
+            
           </View>
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 10}}>
@@ -105,7 +99,7 @@ const CustomDrawer = props => {
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        {/* <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="share-social-outline" size={22} />
             <Text
@@ -117,7 +111,7 @@ const CustomDrawer = props => {
               Tell a Friend
             </Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="exit-outline" size={22} />

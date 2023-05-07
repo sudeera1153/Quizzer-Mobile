@@ -39,6 +39,33 @@ export const getQuizzes_ComArch = () => {
   return firestore().collection('Quizzes').where("title","==","ss").get();
 };
 
+export const getQuizzes_Data= () => {
+  return firestore().collection('Quizzes').where("title","==","121").get();
+};
+
+export const getQuizzes_Ai= () => {
+  return firestore().collection('Quizzes').where("title","==","qdqd").get();
+};
+
+export const getQuizzes_Beginner = () => {
+  return firestore().collection('Quizzes').where("title","==","ss").get();
+};
+
+export const getQuizzes_Intermediate= () => {
+  return firestore().collection('Quizzes').where("title","==","121").get();
+};
+
+export const getQuizzes_Pro= () => {
+  return firestore().collection('Quizzes').where("title","==","qdqd").get();
+};
+
+export const getQuizzes_Master= () => {
+  return firestore().collection('Quizzes').where("title","==","qdqd").get();
+};
+
+
+
+
 
 // Get Quiz Details by id
 export const getQuizById = currentQuizId => {

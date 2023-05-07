@@ -43,6 +43,7 @@ const HomeScreen = ({navigation}) => {
       id: 1,
       name: "Beginner",
       color: "green",
+      
     },
     {
       id: 2,
@@ -138,7 +139,18 @@ const HomeScreen = ({navigation}) => {
           return (
             <TouchableOpacity
               style={styles.cardContainer}
-              onPress={() => console.log("pressed")}
+              onPress={() => {
+                if (item.name === "Beginner") {
+                  navigation.navigate('FilterBeginner')                        
+                    } else if (item.name === "Intermidiate") {
+                      navigation.navigate('FilterIntermidiate')
+                    } else if (item.name === "Pro") {
+                      navigation.navigate('FilterPro')
+                    } else if (item.name === "Master") {
+                      navigation.navigate('FilterMaster')
+                    }
+                  }
+                }
             >
               <Card style={[styles.card, {backgroundColor: item.color}]}>
                 <Text style={styles.text}>{item.name}</Text>

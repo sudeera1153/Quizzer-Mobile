@@ -9,6 +9,8 @@ import Filterscreen_CS from '../screens/FilterScreens/Filterscreen_CS';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
 import FilterComArchStackNavigator from './FilterComArchStackNavigator';
+import FilterDataStackNavigator from './FilterDataStackNavigator';
+import FilterAiStackNavigator from './FilterAiStackNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -56,7 +58,7 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Filter : C#"
+        name="Filter : Programming"
         component={FilterCSStackNavigator}
         options={{
           drawerIcon: ({color}) => (
@@ -65,16 +67,7 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Filter : Maths"
-        component={TestScreen}
-        options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="funnel-outline" size={22} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Filter : Com Architecture"
+        name="Filter : Comp.Theory"
         component={FilterComArchStackNavigator}
         options={{
           drawerIcon: ({color}) => (
@@ -83,8 +76,17 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Filter : DBMS"
-        component={TestScreen}
+        name="Filter : Data & Querrying"
+        component={FilterDataStackNavigator}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="funnel-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Filter : AI & ML"
+        component={FilterAiStackNavigator}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="funnel-outline" size={22} color={color} />
