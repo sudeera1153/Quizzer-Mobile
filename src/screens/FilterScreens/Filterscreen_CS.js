@@ -117,7 +117,7 @@ const HomeScreen = ({navigation}) => {
       <Text 
         style={{
           flex: 1,
-          fontSize: 30,
+          fontSize: 25,
           fontWeight: 'bold',
           color: '#000000',
           textAlign: 'center',
@@ -125,7 +125,7 @@ const HomeScreen = ({navigation}) => {
           marginBottom: 20
         }}
       >
-        Filtered Quiz : C#
+        Filtered Quiz : Programming
       </Text>
     </View>
     
