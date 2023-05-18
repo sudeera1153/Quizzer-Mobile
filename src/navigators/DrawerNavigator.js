@@ -39,7 +39,7 @@ const DrawerNavigator = () => {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Profile"
         component={TestScreen}
         options={{
@@ -56,7 +56,7 @@ const DrawerNavigator = () => {
             <Ionicons name="information-circle-outline" size={22} color={color} />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Filter : Programming"
         component={FilterCSStackNavigator}

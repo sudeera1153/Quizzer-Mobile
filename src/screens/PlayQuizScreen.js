@@ -94,16 +94,15 @@ const PlayQuizScreen = ({navigation, route}) => {
   useEffect(() => {
     getQuizAndQuestionDetails();
     retrivebaseinfo();
-
   }, []);
 
   const getOptionBgColor = (currentQuestion, currentOption) => {
     if (currentQuestion.selectedOption) {
       if (currentOption == currentQuestion.selectedOption) {
         if (currentOption == currentQuestion.correct_answer) {
-          return COLORS.success;
+          return COLORS.black;
         } else {
-          return COLORS.error;
+          return COLORS.black;
         }
       } else {
         return COLORS.white;
@@ -135,11 +134,16 @@ const PlayQuizScreen = ({navigation, route}) => {
         email:userdet.email, 
         degree:userdet.degree, 
         intake:userdet.intake,
+        agegroup: userdet.agegroup,
+        accomodation: userdet.accommodation,
         totalquestions:questions.length,
         correctanswers: correctCount,
         incorrectanswers: incorrectCount,
-        correctpercentage: correctCount/questions.length*100,
-        completeddatetime: `${new Date().getFullYear()}/${('0' + (new Date().getMonth() + 1)).slice(-2)}/${('0' + new Date().getDate()).slice(-2)} ${('0' + new Date().getHours()).slice(-2)}:${('0' + new Date().getMinutes()).slice(-2)}:${('0' + new Date().getSeconds()).slice(-2)}`
+        correctpercentage: (correctCount / questions.length * 100).toFixed(2),
+        completeddatetime: `${new Date().getFullYear()}/${('0' + (new Date().getMonth() + 1)).slice(-2)}/${('0' + new Date().getDate()).slice(-2)} ${('0' + new Date().getHours()).slice(-2)}:${('0' + new Date().getMinutes()).slice(-2)}:${('0' + new Date().getSeconds()).slice(-2)}`,
+        quizcoreArea: quizdet.coreArea,
+        quizlevel:quizdet.level,
+        quizsubject: quizdet.subject
         })
     .then(() => {
 
@@ -156,7 +160,7 @@ const PlayQuizScreen = ({navigation, route}) => {
         position: 'relative',
       }}>
       <StatusBar backgroundColor={COLORS.white} barStyle={'dark-content'} />
-      {/* Top Bar */}
+
       <View
         style={{
           flexDirection: 'row',
@@ -167,25 +171,25 @@ const PlayQuizScreen = ({navigation, route}) => {
           backgroundColor: COLORS.white,
           elevation: 4,
         }}>
-        {/* Back Icon */}
+
         <MaterialIcons
           name="arrow-back"
           size={24}
           onPress={() => navigation.goBack()}
         />
 
-        {/* Title */}
+
         <Text style={{fontSize: 16, marginLeft: 10}}>{title}</Text>
 
-        {/* Correct and incorrect count */}
+
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {/* Correct */}
-          <View
+
+          {/* <View
             style={{
               backgroundColor: COLORS.success,
               flexDirection: 'row',
@@ -206,7 +210,6 @@ const PlayQuizScreen = ({navigation, route}) => {
             </Text>
           </View>
 
-          {/* Incorrect */}
           <View
             style={{
               backgroundColor: COLORS.error,
@@ -226,11 +229,11 @@ const PlayQuizScreen = ({navigation, route}) => {
             <Text style={{color: COLORS.white, marginLeft: 6}}>
               {incorrectCount}
             </Text>
-          </View>
+          </View> */}
         </View>
       </View>
 
-      {/* Questions and Options list */}
+
       <FlatList
         data={questions}
         style={{
@@ -268,7 +271,7 @@ const PlayQuizScreen = ({navigation, route}) => {
                 />
               ) : null}
             </View>
-            {/* Options */}
+
             {item.allOptions.map((option, optionIndex) => {
               return (
                 <TouchableOpacity
@@ -333,7 +336,7 @@ const PlayQuizScreen = ({navigation, route}) => {
         )}
       />
 
-      {/* Result Modal */}
+
       <ResultModal
         isModalVisible={isResultModalVisible}
         correctCount={correctCount}
